@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="efemispruebas.Login"/>
+      <class name="efemispruebas.Menu"/>
+      <class name="efemispruebas.Recomendaciones"/>
+      <class name="efemispruebas.PlanificarRecomendacion"/>
+      <class name="efemispruebas.EjecutarPlanificacion"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
