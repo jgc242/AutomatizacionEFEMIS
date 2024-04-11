@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="0" passed="0" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-04-08T12:25:04 CEST" name="Default suite" finished-at="2024-04-08T12:26:09 CEST" duration-ms="64821">
+  <suite started-at="2024-04-09T13:39:10 CEST" name="Default suite" finished-at="2024-04-09T13:39:10 CEST" duration-ms="25">
     <groups>
     </groups>
-    <test started-at="2024-04-08T12:25:04 CEST" name="Default test" finished-at="2024-04-08T12:26:09 CEST" duration-ms="64821">
-      <class name="efemispruebas.Prueba2">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:efemispruebas.Prueba2@508dec2b]" started-at="2024-04-08T12:25:04 CEST" name="setUp" finished-at="2024-04-08T12:25:07 CEST" duration-ms="2500" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testAutomatizacion()[pri:0, instance:efemispruebas.Prueba2@508dec2b]" started-at="2024-04-08T12:25:07 CEST" name="testAutomatizacion" finished-at="2024-04-08T12:26:09 CEST" duration-ms="61768" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testAutomatizacion -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:efemispruebas.Prueba2@508dec2b]" started-at="2024-04-08T12:26:09 CEST" name="tearDown" finished-at="2024-04-08T12:26:09 CEST" duration-ms="502" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- efemispruebas.Prueba2 -->
+    <test started-at="2024-04-09T13:39:10 CEST" name="Default test" finished-at="2024-04-09T13:39:10 CEST" duration-ms="25">
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

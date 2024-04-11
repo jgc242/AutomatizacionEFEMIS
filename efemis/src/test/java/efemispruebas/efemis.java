@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class efemis {
 	
-	protected WebDriver driver;
-	protected WebDriverWait wait;
+	protected static WebDriver driver;
+	protected static WebDriverWait wait;
 	
 	public efemis(WebDriver driver) {
 		this.driver = driver;

@@ -1,18 +1,25 @@
 package efemispruebas;
 
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import utils.Acciones;
+
+
 public class Menu extends efemis{
 
+	private Acciones acciones;
+	
 	public Menu(WebDriver driver) {
 		super(driver);
+		this.acciones = new Acciones(driver, null);
 		// TODO Auto-generated constructor stub
 	}
-	@Test(dependsOnMethods = "Prueba2.menu")
+
 	public void MenuDesplegable(String OpcionPrueba, String OpcionIdioma, String opcion1, String opcion2) {
 	    
 	    try {
@@ -21,12 +28,12 @@ public class Menu extends efemis{
 	        e.printStackTrace();
 	    }
 	    //Boton del menu desplegable
-	    WebElement DespleglableAdrian1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='main-view']/div[2]/div/div[2]/div/div[3]/a/span[2]")));
-	    DespleglableAdrian1.click();
+	    Acciones.BuscarporXpath("//div[@id='main-view']/div[2]/div/div[2]/div/div[3]/a/span[2]");
 	        
 	    //Extraemos el texto y comprobamos/ si no pone Pruebas Adrian lo seleccionamos
-	    WebElement DespleglableAdrian = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[7]/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div")));
-	    DespleglableAdrian.click();
+	    Acciones.BuscarporXpath("//div[7]/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div");
+
+	    //DespleglableAdrian.click();
 	    WebElement pruebadri = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='dx-item-content dx-list-item-content'and contains(text(), '"+OpcionPrueba+"')]")));
 	    pruebadri.click();
 	    
@@ -42,21 +49,15 @@ public class Menu extends efemis{
 	    WebElement español = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='dx-item-content dx-list-item-content'and contains(text(), '"+OpcionIdioma+"')]")));
 	    español.click();*/
 	    	   
-
-	 
 	    
 	    //Desplegamos el menu izquierdo
-	    WebElement menuIzquierdo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='main-view']/div[2]/div/div[2]/div/div/a")));
-	    menuIzquierdo.click();
+	   Acciones.BuscarporXpath("//div[@id='main-view']/div[2]/div/div[2]/div/div/a");
 	    
 	    //Pulsamos sobre Actividades
-	    //Sirve para cualquier elemento del menu
-	    WebElement Actividades = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@title='"+ opcion1 +"']")));
-	    Actividades.click(); 
+	   Acciones.BuscarporXpath("//li[@title='"+ opcion1 +"']");
 
 	    //Accedemos a la opcion2 (Recomendaciones)
-	    WebElement Recomendaciones = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='"+opcion2+"']")));
-	    Recomendaciones.click();
+	  Acciones.BuscarporXpath("//a[text()='"+opcion2+"']");
 	}
 	
 

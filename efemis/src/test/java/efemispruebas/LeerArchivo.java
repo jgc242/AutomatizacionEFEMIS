@@ -25,7 +25,7 @@ public class LeerArchivo extends efemis{
 		// TODO Auto-generated constructor stub
 	}
 
-	private String url;
+/*	private String url;
 	private String usuario;
 	private String contrasena;
 	private String pruebaAdrian;
@@ -42,7 +42,7 @@ public class LeerArchivo extends efemis{
 	private String accion;
 	private String supervisor;
 	private String estado;
-	//filepath --> camino al fichero
+	//filepath --> camino al fichero*/
 
 	 public void leer(String filePath, String nombre) throws IOException {
 	        File file = new File(filePath);
@@ -110,8 +110,8 @@ public class LeerArchivo extends efemis{
             e.printStackTrace();
             return "Error al leer el archivo";
         }
-    }
-	    @BeforeSuite
+    }}
+	 /*   @BeforeSuite
 	    public void datos(){
 	    		System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe"); 
 	    		driver = new ChromeDriver();
@@ -202,7 +202,5 @@ public class LeerArchivo extends efemis{
 	    public String getEstado() {
 	        return estado;
 	    }
-	    }
-
-
+	    }*/
 

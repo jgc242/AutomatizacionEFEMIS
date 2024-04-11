@@ -8,22 +8,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import utils.Acciones;
+
 public class Recomendaciones extends efemis{
 
 	public Recomendaciones(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	@Test(dependsOnMethods = "Prueba2.Recomendaciones")
+
 	public void crearRecomendacion(String OpcionCampana, String fechaInicio, String fechaFin, String OpcionTarea, String OpcionCultivo,String OpcionGuardado) {
 		//String OpcionFechaInicio, String OpFechaFin,
 		//Pulsamos el boton de mas, para crear una recomendacion
-    	WebElement crear = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[3]/div/div/div/div/i")));
-        crear.click();
-        
+		Acciones.BuscarporXpath("//div[3]/div/div/div/div/i");
+
         //Seleccionamos el desplegable de campa�a y lo rellenamos
-           WebElement campana = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[2]/div/div/div/div[2]/div/div[3]/div[2]/div/div/div[2]/div/div/div")));
-           campana.click();
+		Acciones.BuscarporXpath("//div[2]/div/div/div/div[2]/div/div[3]/div[2]/div/div/div[2]/div/div/div");
+
           
          
          /**
@@ -32,12 +33,12 @@ public class Recomendaciones extends efemis{
 
          //Buscamos el campo de escritura y ponemos campa�a A
            WebElement escritura = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[aria-describedby='dx-col-7']")));
-           // WebElement escritura = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[aria-describedby='dx-col'")));
            escritura.sendKeys(OpcionCampana);
           
            //Buscamos el elemento filtrado y le hacemos click       
-           WebElement resultadoBusqueda = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[text()='" + OpcionCampana + "']")));
-           resultadoBusqueda.click();
+          Acciones.BuscarporXpath("//td[text()='" + OpcionCampana + "']");
+           //WebElement resultadoBusqueda = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[text()='" + OpcionCampana + "']")));
+          // resultadoBusqueda.click();
          
            
            //Fecha inicio
@@ -57,8 +58,8 @@ public class Recomendaciones extends efemis{
           */
            
          //Seleccionamos el desplegable de tarea y lo rellenamos
-           WebElement tarea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[4]/div[2]/div/div/div[2]/div/div/div")));
-           tarea.click();
+          Acciones.BuscarporXpath("//div[4]/div[2]/div/div/div[2]/div/div/div");
+
             
          //Buscamos el campo de escritura y ponemos PRUEBA GENERAL
            WebElement escrituraTarea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div/input")));   
@@ -66,8 +67,11 @@ public class Recomendaciones extends efemis{
 
            
          //Buscamos el elemento filtrado y le hacemos click       
-          WebElement resultadoTarea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//td[contains(text(), '"+OpcionTarea+"')][2]")));
-           resultadoTarea.click();
+         Acciones.BuscarporXpath(".//td[contains(text(), '"+OpcionTarea+"')][2]");
+          // WebElement resultadoTarea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//td[contains(text(), '"+OpcionTarea+"')][2]")));
+         //  WebElement resultadoTarea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//tr[contains(td[2],'" + OpcionTarea + "')]")));
+   
+          // resultadoTarea.click();
        
            
            
@@ -75,8 +79,9 @@ public class Recomendaciones extends efemis{
          * Seleccion Cultivo (Cultivo A)
          */
          //Seleccionamos el desplegable de Cultivo 
-           WebElement cultivo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[2]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div")));
-           cultivo.click();
+         Acciones.BuscarporXpath("//div[2]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div"); 
+        // WebElement cultivo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[2]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div")));
+          // cultivo.click();
          
            //Buscamos el campo de escritura y ponemos Cultivo A
            WebElement escrituraCultivo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dx-texteditor-input")));
@@ -94,8 +99,9 @@ public class Recomendaciones extends efemis{
             */
            
            //Hacemos click en el boton Guardar Como
-           WebElement GuardarComo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='main-view']/div[3]/div/div[2]/div/div[4]/div/div[2]/a[2]/span")));
-           GuardarComo.click();
+           Acciones.BuscarporXpath("//div[@id='main-view']/div[3]/div/div[2]/div/div[4]/div/div[2]/a[2]/span");
+         // WebElement GuardarComo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='main-view']/div[3]/div/div[2]/div/div[4]/div/div[2]/a[2]/span")));
+          // GuardarComo.click();
                     
            //Guardamos la recomendacion
            WebElement Guardar = driver.findElement(By.xpath("//div[@data-tooltip='"+OpcionGuardado+"']"));
