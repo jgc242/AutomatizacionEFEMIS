@@ -13,7 +13,8 @@ import utils.Acciones;
 public class Menu extends efemis{
 
 	private Acciones acciones;
-	
+	private String urlActual1;
+
 	public Menu(WebDriver driver) {
 		super(driver);
 		this.acciones = new Acciones(driver, null);
@@ -28,8 +29,11 @@ public class Menu extends efemis{
 	        e.printStackTrace();
 	    }
 	    //Boton del menu desplegable
-	    Acciones.BuscarporXpath("//div[@id='main-view']/div[2]/div/div[2]/div/div[3]/a/span[2]");
-	        
+	  //*[@id="main-view"]/div[3]/div[1]/div[2]/div/div[3]/a[1]
+	   // Acciones.BuscarporXpath("//div[@id='main-view']/div[2]/div/div[2]/div/div[3]/a/span[2]");
+		 Acciones.BuscarporXpath("//*[@id=\"main-view\"]/div[3]/div[1]/div[2]/div/div[3]/a[1]");
+
+	    
 	    //Extraemos el texto y comprobamos/ si no pone Pruebas Adrian lo seleccionamos
 	    Acciones.BuscarporXpath("//div[7]/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div");
 
@@ -51,14 +55,26 @@ public class Menu extends efemis{
 	    	   
 	    
 	    //Desplegamos el menu izquierdo
-	   Acciones.BuscarporXpath("//div[@id='main-view']/div[2]/div/div[2]/div/div/a");
-	    
-	    //Pulsamos sobre Actividades
+	   Acciones.BuscarporXpath("//*[@id=\"main-view\"]/div[3]/div[1]/div[2]/div/div[1]/a");
+
+	   //Pulsamos sobre Actividades
 	   Acciones.BuscarporXpath("//li[@title='"+ opcion1 +"']");
 
 	    //Accedemos a la opcion2 (Recomendaciones)
 	  Acciones.BuscarporXpath("//a[text()='"+opcion2+"']");
+	  
+	  try {
+	         Thread.sleep(7000); 
+	     } catch (InterruptedException e) {
+	         e.printStackTrace();
+	     }
+	//Obtenemos la URL
+       urlActual1 = driver.getCurrentUrl();
+       System.out.println(urlActual1);
 	}
 	
+	public String getUrl() {
+		return urlActual1;
+	}	
 
 }

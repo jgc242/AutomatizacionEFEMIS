@@ -34,11 +34,18 @@ public class Acciones extends efemis{
 	
 	public static void BuscarporXpath(String xpath) {
 		WebElement elemento = esperarAClickeable(By.xpath(xpath));
-        elemento.click();
+		try {
+			 elemento.click();
+		}catch(Exception e) {
+		e.printStackTrace();		
+		}
+       
 	}
 	private static WebElement esperarAClickeable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+	
+	
 	private boolean estadoDespuesDeInicioSesionEsCorrecto() {
 	    // Verificar si la página de inicio después de iniciar sesión se ha cargado correctamente
 	    String tituloEsperado = "Página de inicio"; // Aquí debes poner el título esperado de la página de inicio
@@ -68,7 +75,7 @@ public class Acciones extends efemis{
 		//extent = new ExtentReports();
 		//ExtentTest screen = extent.createTest("Captura"); 
 		captura = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-         destino = new File("efemis/efemis/target/" + nombreArchivo + ".jpg");
+         destino = new File("efemis/target/" + nombreArchivo + ".png");
          FileUtils.copyFile(captura, destino);
          screen.fail(MediaEntityBuilder.createScreenCaptureFromPath(destino.getAbsolutePath()).build());
    

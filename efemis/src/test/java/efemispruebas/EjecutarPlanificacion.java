@@ -20,6 +20,8 @@ public class EjecutarPlanificacion extends efemis{
 	private String maquinaria;
 	private String aperos;
 	private String herramineta;
+	private String urlActual1;
+
 	
 	public EjecutarPlanificacion(WebDriver driver) {
 		super(driver);
@@ -55,19 +57,18 @@ public class EjecutarPlanificacion extends efemis{
      */
 
     try {
-        Thread.sleep(8000); 
+        Thread.sleep(10000); 
     } catch (InterruptedException e) {
         e.printStackTrace();
     }
       
     
     //Seleccionamos supervisor (2403 - grower null)
-  //*[@id="main-view"]/div[3]/div[2]/div/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[2]/div/div                                                                   
-                                                                        //*[@id="main-view"]/div[3]/div[2]/div/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[2]/div/div/div
      WebElement Desplegable = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[3]/div[2]/div/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[2]")));
      Desplegable.click();
+
      try {
-         Thread.sleep(5000); 
+         Thread.sleep(4000); 
      } catch (InterruptedException e) {
          e.printStackTrace();
      }    
@@ -76,7 +77,7 @@ public class EjecutarPlanificacion extends efemis{
        WebElement escrituraSupervisor = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//html/body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[1]/div/div[2]/div/div/div[1]/input")));   
       escrituraSupervisor.sendKeys(OpcionSupervisor);
      try {
-         Thread.sleep(3000); 
+         Thread.sleep(4000); 
      } catch (InterruptedException e) {
          e.printStackTrace();
      }
@@ -137,7 +138,12 @@ public class EjecutarPlanificacion extends efemis{
 	Nplanificacion2= Nplani2.getText();
 	System.out.println(Nplanificacion2.toString());
 		 
+	//Obtenemos la URL
+    urlActual1 = driver.getCurrentUrl();
+	
     }
+	
+	
 	
 	public String getIdentificador2() {
 		return compIdentificador;
@@ -165,6 +171,9 @@ public class EjecutarPlanificacion extends efemis{
 		return herramineta;
 	}
 	
+	public String getUrl() {
+		return urlActual1;
+	}
 	
 }
 	

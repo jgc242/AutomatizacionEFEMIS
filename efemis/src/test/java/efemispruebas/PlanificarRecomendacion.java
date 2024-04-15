@@ -12,6 +12,7 @@ import utils.Acciones;
 public class PlanificarRecomendacion extends efemis {
 
 	private String identificador;
+	private String urlActual1;
 
 
 	
@@ -25,8 +26,8 @@ public class PlanificarRecomendacion extends efemis {
 		//esperamos hasta que un boton con el total de reconendaciones sea visible para continuar con la planificacion  	
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main-view\"]/div[3]/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div[5]/div/div[4]/div/div/div[1]/div/div/div")));
 		 System.out.println("Encontrado");   	
-		// Encontrar la fila que contiene el elemento deseado (Obtener id)243
-		WebElement fila = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[@class='dx-row dx-data-row dx-row-lines dx-column-lines']//td[@aria-describedby='dx-col-232']")));
+		// Encontrar la fila que contiene el elemento deseado (Obtener id)232
+		WebElement fila = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[@class='dx-row dx-data-row dx-row-lines dx-column-lines']//td[@aria-describedby='dx-col-235']")));
 		identificador= fila.getText();
 		System.out.println(identificador.toString());
 		 
@@ -127,12 +128,23 @@ public class PlanificarRecomendacion extends efemis {
          */
         Acciones.BuscarporXpath("//div[3]/div[1]/div[2]/div/div[4]/div/div[2]/a[2]");
 
+        try {
+	         Thread.sleep(7000); 
+	     } catch (InterruptedException e) {
+	         e.printStackTrace();
+	     }
+	//Obtenemos la URL
+      urlActual1 = driver.getCurrentUrl();
+      System.out.println(urlActual1);
      
 	}
 	public String getIdentificador() {
 		return identificador;
 	}
 
+	public String getUrl() {
+		return urlActual1;
+	}
 	
 
 }

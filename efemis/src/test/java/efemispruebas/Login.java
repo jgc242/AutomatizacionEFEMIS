@@ -9,10 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import utils.Acciones;
+
 public class Login extends efemis {
 
 	private String valorUsuario;
 	private String valorContrasena;
+	private String urlActual;
 	
 	public Login(WebDriver driver) {
 		super(driver);
@@ -60,12 +63,27 @@ public class Login extends efemis {
 		WebElement entrar = driver.findElement(By.name("btnSignIn"));
 		entrar.click();
 
+		 try {
+		        Thread.sleep(4000); 
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    }
+		//Desplegamos el menu izquierdo
+		//*[@id="main-view"]/div[2]/div[1]/div[2]/div/div[1]/a
+		Acciones.BuscarporXpath("//*[@id=\"main-view\"]/div[2]/div[1]/div[2]/div/div[1]/a");
+		//html/body/div/div[1]/div[3]/div[1]/div[2]/div/div[1]/a
+		//*[@id="main-view"]/div[3]/div[1]/div[2]/div/div[1]/a
+		 //Pulsamos sobre Inicio
+		   Acciones.BuscarporXpath("//a[contains(text(),'Inicio')]");
+		
+		   //Obtenemos la URL
+	       urlActual = driver.getCurrentUrl();
+
 	}
 	
-	public String getUsuario() {
-		return valorUsuario;
+	public String getUrl() {
+		return urlActual;
 	}
-	public String getContrasena() {
-		return valorContrasena;
-	}
+	
+
 }

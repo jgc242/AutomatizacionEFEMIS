@@ -2,6 +2,7 @@ package efemispruebas;
 
 import static org.testng.Assert.assertEquals;
 
+
 import java.io.File;
 import java.io.IOException;
 
@@ -65,6 +66,8 @@ public class Prueba1test {
 	private LeerArchivo Excel;
 	private ExtentReports extent;
 	private ExtentTest screen;
+	
+	private int numeroColumna = 4;
 
 	
 
@@ -83,29 +86,29 @@ public class Prueba1test {
         String nombreHoja = "Hoja1";        
         try {
         	//URL
-        	url = Excel.valorCelda(filePath, nombreHoja, 1, 3);
+        	url = Excel.valorCelda(filePath, nombreHoja, 1, numeroColumna);
         	//Login
-            usuario = Excel.valorCelda(filePath, nombreHoja, 2, 3);
-            contrasena = Excel.valorCelda(filePath, nombreHoja, 3, 3);
+            usuario = Excel.valorCelda(filePath, nombreHoja, 2, numeroColumna);
+            contrasena = Excel.valorCelda(filePath, nombreHoja, 3, numeroColumna);
             //Menu
-            pruebaAdrian = Excel.valorCelda(filePath, nombreHoja, 4, 3);
-            idioma = Excel.valorCelda(filePath, nombreHoja, 5, 3);
+            pruebaAdrian = Excel.valorCelda(filePath, nombreHoja, 4, numeroColumna);
+            idioma = Excel.valorCelda(filePath, nombreHoja, 5, numeroColumna);
             
             //Recomendaciones
-            campana = Excel.valorCelda(filePath, nombreHoja, 7, 3);
-            tarea = Excel.valorCelda(filePath, nombreHoja, 9, 3);            
-            cultivo =Excel.valorCelda(filePath, nombreHoja, 13, 3);
-            guardar =Excel.valorCelda(filePath, nombreHoja, 15, 3);
+            campana = Excel.valorCelda(filePath, nombreHoja, 7, numeroColumna);
+            tarea = Excel.valorCelda(filePath, nombreHoja, 9, numeroColumna);            
+            cultivo =Excel.valorCelda(filePath, nombreHoja, 13, numeroColumna);
+            guardar =Excel.valorCelda(filePath, nombreHoja, 15, numeroColumna);
             //Planificar recomendacion
-            accion = Excel.valorCelda(filePath, nombreHoja, 16, 3);
-            empresaServicios = Excel.valorCelda(filePath, nombreHoja, 25, 3);
-            trabajadores = Excel.valorCelda(filePath, nombreHoja, 28, 3);
-            maquinaria = Excel.valorCelda(filePath, nombreHoja, 31, 3);
-            aperos = Excel.valorCelda(filePath, nombreHoja, 34, 3);
-            herramientas = Excel.valorCelda(filePath, nombreHoja, 37, 3);
+            accion = Excel.valorCelda(filePath, nombreHoja, 16, numeroColumna);
+            empresaServicios = Excel.valorCelda(filePath, nombreHoja, 25, numeroColumna);
+            trabajadores = Excel.valorCelda(filePath, nombreHoja, 28, numeroColumna);
+            maquinaria = Excel.valorCelda(filePath, nombreHoja, 31, numeroColumna);
+            aperos = Excel.valorCelda(filePath, nombreHoja, 34, numeroColumna);
+            herramientas = Excel.valorCelda(filePath, nombreHoja, 37, numeroColumna);
             //Ejecutar planificacion
-            supervisor = Excel.valorCelda(filePath, nombreHoja, 48, 3);
-            estado = Excel.valorCelda(filePath, nombreHoja, 65, 3);
+            supervisor = Excel.valorCelda(filePath, nombreHoja, 48, numeroColumna);
+            estado = Excel.valorCelda(filePath, nombreHoja, 65, numeroColumna);
             VideoRecorder.startRecord("main");
             
         } catch (IOException e) {
@@ -117,7 +120,7 @@ public class Prueba1test {
     public void tearDown() {     
     	extent.flush();
     	if (driver != null) {
-            driver.quit();
+           driver.quit();
        }
     	VideoRecorder.stopRecord();
     	
@@ -126,11 +129,13 @@ public class Prueba1test {
 
     @Test
 	public void testAutomatizacion() throws IOException, InterruptedException {
-        login();
-        menu();
-       // Recomendaciones();
-        //PlanificarRecomendacion();
-        //EjecutarPlanificacion();	
+    	   login();
+           menu();
+           Recomendaciones();
+           PlanificarRecomendacion();
+           EjecutarPlanificacion();	
+    
+    	
 	}
 
 	private void login() throws IOException {
@@ -142,17 +147,16 @@ public class Prueba1test {
 		screen.info("Usuario: " + usuario);
 		screen.info("Contraseña: " + contrasena);
         login.iniciarSesion(url, usuario, contrasena);
-        Compusuario = login.getUsuario();
-        Compcontrasena =login.getContrasena();
+        String UrlActual = login.getUrl();
   
         try {
-        	//assertEquals(Compusuario, usuario);
-           // assertEquals(Compcontrasena,contrasena);
-        	screen.pass("Inicio de sesión exitoso.");
+        	Assert.assertEquals(UrlActual, "https://efemispre.hispatec.com/dashboard");
+        	screen.pass("Inicio de sesion exitoso.");
         } catch (AssertionError e) {
-        	screen.fail("Inicio de sesión fallido: " + e.getMessage());
+        	screen.fail("[ Error ] ->Inicio de sesion fallido: " + e.getMessage());
             accionn.tomarCapturaDePantalla("errorInicioSesion");
             e.printStackTrace();
+            throw e;
         }
         
 	}
@@ -164,14 +168,16 @@ public class Prueba1test {
 		screen.info("Cargando menú desplegable con las siguientes opciones:");
 		screen.info("Prueba Adrian: " + pruebaAdrian);
 		screen.info("Idioma: " + idioma);
+	    menu.MenuDesplegable(pruebaAdrian, idioma, "Actividades", "Recomendaciones");
+		String Url1 = menu.getUrl();
 	    try {
-		    menu.MenuDesplegable(pruebaAdrian, idioma, "Actividades", "Recomendaciones");
+        	Assert.assertEquals(Url1, "https://efemispre.hispatec.com/recommendations");    
 		    screen.pass("La ruta del menu seguida correctamente");
-        } catch (Exception e) {
-        	screen.fail("No se ha seguido la ruta debido a: " + e.getMessage());
-        	//menuTest.fail(MediaEntityBuilder.createScreenCaptureFromPath("ErrorMenu.jpg").build());
+        } catch (AssertionError e) {
+        	screen.fail("[ Error ] -> No se ha seguido la ruta debido a: " + e.getMessage());
             accionn.tomarCapturaDePantalla("MenuErroneo");
             e.printStackTrace();
+            throw e;
 
 
         }
@@ -194,16 +200,37 @@ public class Prueba1test {
 		screen.info("Tarea: " + tarea);
 		screen.info("Cultivo: " + cultivo);
 		screen.info("Guardar: " + guardar);
-    	recomendacion.crearRecomendacion(campana, inicioString, finString, tarea, cultivo, guardar);
+		recomendacion.crearRecomendacion(campana, inicioString, finString, tarea, cultivo, guardar);
+		String URL4 = recomendacion.getUrl2();
+		String URL5 = recomendacion.getUrl();
+		String camp = recomendacion.getUCampana();
+		String tar = recomendacion.getTarea();
+		String cul = recomendacion.getCultivo();
 
         try {
+        	
+
+    		Assert.assertEquals(camp, campana);  
+       	    screen.pass("[ OK ] -> Se ha encontrado la campaña con exito.");
+    		
+    		Assert.assertEquals(tar, tarea);  
+       	    screen.pass("[ OK ] -> Se ha aencontrado la tarea con exito.");
+  		
+    		//Assert.assertEquals(cul, cultivo);  
+       	    //screen.pass("[ OK ] -> Se ha encontrado el cultivo con exito.");
+    		
+        	Assert.assertEquals(URL4, "https://efemispre.hispatec.com/recommendations/create");  
+       	    screen.pass("[ OK ] -> Se ha accedido correctamente a crear la recomendacion.");
+
+        	Assert.assertEquals(URL5, "https://efemispre.hispatec.com/recommendations"); 
+       	    screen.pass("[ OK ] -> Se ha comprobado la finalizacion de la recomendacion.");
+
         	screen.pass("Recomendacion creada exitosamente");
-        } catch (Exception e) {
-        	screen.fail("La recomendacion no se ha creado debidoa a: " + e.getMessage());
-        	//screen.fail(MediaEntityBuilder.createScreenCaptureFromPath("ErrorPlanificacion.png").build());
+        } catch (AssertionError e) {
+        	screen.fail("[ Error ] -> La recomendacion no se ha creado debidoa a: " + e.getMessage());
         	accionn.tomarCapturaDePantalla("RecomendacionesError");
             e.printStackTrace();
-
+            throw e;
         }
         
 	}
@@ -219,15 +246,21 @@ public class Prueba1test {
 			screen.info("Maquinaria: " + maquinaria);
 			screen.info("Aperos: " + aperos);
 			screen.info("Herramientas: " + herramientas);
+	        planificar.PlanificarReco(accion, empresaServicios, trabajadores, maquinaria, aperos, herramientas);
+			String Url2 = planificar.getUrl();
 		    try {
-		        planificar.PlanificarReco(accion, empresaServicios, trabajadores, maquinaria, aperos, herramientas);
 		        identificador = planificar.getIdentificador();//Cogemos el id
-		        screen.pass("Planificación de la recomendación realizada exitosamente.");
-		    } catch (Exception e) {
-		    	screen.fail("Error al intentar planificar la recomendación: " + e.getMessage());
+	        	Assert.assertEquals(Url2, "https://efemispre.hispatec.com/planning");
+           	    screen.pass("[ OK ] -> Comprobamos que la URL coincide con la de planificar una recomendacion.");
+
+		        screen.pass("Planificacion de la recomendacion realizada exitosamente.");
+		    } catch (AssertionError e) {
+		    	screen.fail("[ Error ] -> Error al intentar planificar la recomendación: " + e.getMessage());
 		    	accionn.tomarCapturaDePantalla("PlanificarRecomendacionError");
-	            e.printStackTrace();		
+	            e.printStackTrace();
+	            throw e;
 	            }
+		    
 
     }
 	
@@ -249,36 +282,39 @@ public class Prueba1test {
         	CompMaquinaria = ejecutar.getMaquinaria();
         	CompAperos = ejecutar.getAperos();
         	CompHerramientas = ejecutar.getHerramientas();
-        	// Agregar aserciones para verificar que la planificaci�n de la recomendaci�n funcion� correctamente
-        /*	Assert.assertEquals(identificador,compIdentificador);
-        	//Comprobaciones 
-        	//Empresa de servicios
-        	Assert.assertEquals(empresaServicios,CompEmpresaServicios);
-        	//Trabajadores
-        	Assert.assertEquals(trabajadores,CompTrabajadores);
-        	//Maquinaria
-       		Assert.assertEquals(maquinaria,CompMaquinaria);
-        	//Aperos
-       		Assert.assertEquals(aperos,CompAperos);
-        	//Herramientas
-       		Assert.assertEquals(herramientas,CompHerramientas);
-       		//Numero planificaciones
-        	Assert.assertEquals(Nplanificacion, Nplanificacion2);*/
+        	String Url3 = ejecutar.getUrl();
+
         	 try {
-        		 Assert.assertEquals(identificador,compIdentificador);
              	 Assert.assertEquals(empresaServicios,CompEmpresaServicios);
+            	 screen.pass("[ OK ] -> Empresa de servcios comprobadas.");
+
              	 Assert.assertEquals(trabajadores,CompTrabajadores);
+            	 screen.pass("[ OK ] -> Trabajadoras comprobados.");
+
             	 Assert.assertEquals(maquinaria,CompMaquinaria);
+            	 screen.pass("[ OK ] -> Maquinaria comprobada.");
+
             	 Assert.assertEquals(aperos,CompAperos);
+            	 screen.pass("[ OK ] -> Aperos comprobados.");
+
             	 Assert.assertEquals(herramientas,CompHerramientas);
-             	 Assert.assertEquals(Nplanificacion, Nplanificacion2);
-         		screen.pass("Ejecucion de la planificacion llevada a cabo correctamente.");
+            	 screen.pass("[ OK ] -> Herramientas Comprobadas.");
+
+            	 Assert.assertEquals(identificador,compIdentificador);
+           		 screen.pass("[ OK ] -> Comprobamos que los ID corresponden a la misma recomendacion.");
+           		 
+             	 Assert.assertEquals(Nplanificacion, Nplanificacion2);     	 
+            	 screen.pass("[ OK ] -> Comprobamos que los ID de la planificacion corresponden.");
+
+            	 Assert.assertEquals(Url3,"https://efemispre.hispatec.com/task");
+         		 screen.pass("Ejecucion de la planificacion llevada a cabo correctamente.");
 
              	 
- 		    } catch (Exception e) {
- 		    	screen.fail("Error al intentar ejecutar la planificacion: " + e.getMessage());
+ 		    } catch (AssertionError e) {
+ 		    	screen.fail("[ Error ] -> Error al intentar ejecutar la planificacion: " + e.getMessage());
  		    	accionn.tomarCapturaDePantalla("EjecutarPlanificacion");
- 	            e.printStackTrace();		
+ 	            e.printStackTrace();
+ 	           throw e;
  	            }
        
    
