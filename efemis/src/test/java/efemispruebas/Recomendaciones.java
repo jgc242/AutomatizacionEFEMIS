@@ -1,5 +1,6 @@
 package efemispruebas;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import org.openqa.selenium.By;
@@ -24,30 +25,28 @@ public class Recomendaciones extends efemis {
 	}
 
 	public void crearRecomendacion(String OpcionCampana, String fechaInicio, String fechaFin, String OpcionTarea,
-			String OpcionCultivo, String OpcionGuardado) {
+			String OpcionCultivo, String OpcionGuardado) throws IOException {
 		// String OpcionFechaInicio, String OpFechaFin,
 		// Pulsamos el boton de mas, para crear una recomendacion
-		Acciones.BuscarporXpath("//div[3]/div/div/div/div/i");
+		Acciones.BuscarporXpath("//div[3]/div/div/div/div/i", "Boton crear recomendacion");
 
 		// Seleccionamos el desplegable de campa�a y lo rellenamos
-		Acciones.BuscarporXpath("//div[2]/div/div/div/div[2]/div/div[3]/div[2]/div/div/div[2]/div/div/div");
+		Acciones.BuscarporXpath("//div[2]/div/div/div/div[2]/div/div[3]/div[2]/div/div/div[2]/div/div/div", "Desplegable campaña");
 		
 		/**
 		 * Seleccion CAMPA�A A
 		 */
 
 		// Buscamos el campo de escritura y ponemos campa�a A7
-		//*[@id="treeList"]/div/div[5]/div/table/tbody/tr[2]/td/div/div[2]/div/div/div[1]/input
-		WebElement escritura = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[aria-describedby='dx-col-11']")));
-		escritura.clear();
-		escritura.sendKeys(OpcionCampana);
+		Acciones.escribirCSS("input[aria-describedby='dx-col-11']", "campoEscrituraCampaña", OpcionCampana);
 		
 
 		// Buscamos el elemento filtrado y le hacemos click
-		Acciones.BuscarporXpath("//td[text()='" + OpcionCampana + "']");
+		Acciones.BuscarporXpath("//td[text()='" + OpcionCampana + "']", "seleccion campaña");
 		
 		
-		valorCampana= escritura.getAttribute("value");
+		WebElement camp = driver.findElement(By.cssSelector("input[aria-describedby='dx-col-11']"));
+		valorCampana= camp.getAttribute("value");
 		System.out.println(valorCampana);
 
 		// Fecha inicio
@@ -69,45 +68,38 @@ public class Recomendaciones extends efemis {
 		 */
 
 		// Seleccionamos el desplegable de tarea y lo rellenamos
-		Acciones.BuscarporXpath("//div[4]/div[2]/div/div/div[2]/div/div/div");
+		Acciones.BuscarporXpath("//div[4]/div[2]/div/div/div[2]/div/div/div", "desplegable tarea");
 
-		// Buscamos el campo de escritura y ponemos PRUEBA GENERAL
-		WebElement escrituraTarea = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-				"//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div/input")));
-		escrituraTarea.sendKeys(OpcionTarea);
+		// Buscamos el campo de escritura y ponemos PRUEBA GENERAl
+		Acciones.escribirXpathString("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div/input", "Escritura de la tarea", OpcionTarea);
 
 		// Buscamos el elemento filtrado y le hacemos click
-		Acciones.BuscarporXpath(".//td[contains(text(), '" + OpcionTarea + "')][2]");
+		Acciones.BuscarporXpath(".//td[contains(text(), '" + OpcionTarea + "')][2]", "seleccion tarea");
 
-		 urlActual2 = driver.getCurrentUrl();
-	      System.out.println(urlActual2);
-	      
-	      valorTarea= escrituraTarea.getAttribute("value");
-			System.out.println(valorTarea);
+	    urlActual2 = driver.getCurrentUrl();
+	    WebElement tar = driver.findElement(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div/input"));
+	    valorTarea= tar.getAttribute("value");
+		System.out.println(tar);
 		
 		/**
 		 * Seleccion Cultivo (Cultivo A)
 		 */
 		// Seleccionamos el desplegable de Cultivo
-		Acciones.BuscarporXpath("//div[2]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div");
+		Acciones.BuscarporXpath("//div[2]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div/div", " Desplegable cultivo");
 
 		// Buscamos el campo de escritura y ponemos Cultivo A
-		WebElement escrituraCultivo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dx-texteditor-input")));
-		escrituraCultivo.sendKeys(OpcionCultivo);
+		Acciones.escribirCSS("input[aria-describedby='dx-col-22']", "Busqueda campo escritura", OpcionCultivo);
 
 		// Seleccionamos Cultivo A
-		WebElement botonasociado = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(), '" + OpcionCultivo+ "')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']")));
-		botonasociado.click();
+		Acciones.clickVisibility("//td[contains(text(), '" + OpcionCultivo+ "')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']", "click en el cultivo buscado");
 		
-		//valorCultivo= escrituraCultivo.getAttribute("value");
-		//System.out.println(valorCultivo);
 
 		/**
 		 * Guardamos Recomendaciones
 		 */
 
 		// Hacemos click en el boton Guardar Como
-		Acciones.BuscarporXpath("//div[@id='main-view']/div[3]/div/div[2]/div/div[4]/div/div[2]/a[2]/span");
+		Acciones.BuscarporXpath("//div[@id='main-view']/div[3]/div/div[2]/div/div[4]/div/div[2]/a[2]/span", "click guardar como");
 
 
 		// Guardamos la recomendacion

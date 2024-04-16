@@ -46,10 +46,10 @@ public class EjecutarPlanificacion extends efemis{
 	
 
 	//Desplegamos el desplegable de acciones
-	Acciones.BuscarporXpath("//div[3]/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div[5]/div/div[6]/div[2]/table/tbody/tr[1]/td[2]/div/div/div/div");
+	Acciones.BuscarporXpath("//div[3]/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div[5]/div/div[6]/div[2]/table/tbody/tr[1]/td[2]/div/div/div/div", "Desplegable acciones");
   
     //Boton Ejecutar planificaion
-    Acciones.BuscarporXpath("//body/div[2]/div/div/div/div[1]/div/div[1]/div[2]/div[4]/div");
+    Acciones.BuscarporXpath("//body/div[2]/div/div/div/div[1]/div/div[1]/div[2]/div[4]/div", "Boton ejecutar plenificacion");
        
 
     /**
@@ -64,8 +64,9 @@ public class EjecutarPlanificacion extends efemis{
       
     
     //Seleccionamos supervisor (2403 - grower null)
-     WebElement Desplegable = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[3]/div[2]/div/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[2]")));
-     Desplegable.click();
+    /* WebElement Desplegable = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[3]/div[2]/div/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[2]")));
+     Desplegable.click();*/
+     Acciones.BuscarporXpath("//div[3]/div[2]/div/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[2]", "Desplegable supervisor");
 
      try {
          Thread.sleep(4000); 
@@ -73,23 +74,23 @@ public class EjecutarPlanificacion extends efemis{
          e.printStackTrace();
      }    
      //Escritura supervisor
-   //*[@id="treeList"]/div/div[5]/div/table/tbody/tr[2]/td[1]/div/div[2]/div/div/div[1]/input
-       WebElement escrituraSupervisor = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//html/body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[1]/div/div[2]/div/div/div[1]/input")));   
-      escrituraSupervisor.sendKeys(OpcionSupervisor);
+      /* WebElement escrituraSupervisor = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//html/body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[1]/div/div[2]/div/div/div[1]/input")));   
+      escrituraSupervisor.sendKeys(OpcionSupervisor);*/
+      Acciones.escribirXpathString("//html/body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[1]/div/div[2]/div/div/div[1]/input", "Escritura supervisor", OpcionSupervisor);
      try {
          Thread.sleep(4000); 
      } catch (InterruptedException e) {
          e.printStackTrace();
      }
    //Buscamos el elemento filtrado y le hacemos click 
-     Acciones.BuscarporXpath("//td[text()='"+OpcionSupervisor+"']");
+     Acciones.BuscarporXpath("//td[text()='"+OpcionSupervisor+"']", "Seleccion supervisor");
   
     //Seleccionamos Estado (Ejec.Finalizada
-     Acciones.BuscarporXpath("//div[3]/div[2]/div/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[1]/input");
+     Acciones.BuscarporXpath("//div[3]/div[2]/div/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[1]/input", "Seleccion ejecucion finalizada");
     	   
     
   //Seleccion de ejecucion finalizada
-     Acciones.BuscarporXpath("//div[@class='dx-item-content dx-list-item-content' and text()='"+OpcionEstado+"']");   
+     Acciones.BuscarporXpath("//div[@class='dx-item-content dx-list-item-content' and text()='"+OpcionEstado+"']", "Click ejecucion finalizada");   
     
     /**
      * Comprobaciones
@@ -123,7 +124,7 @@ public class EjecutarPlanificacion extends efemis{
     
     
     //Guardamos el procesos
-    Acciones.BuscarporXpath("//div[3]/div[1]/div[2]/div/div[4]/div/div[2]/a[2]");
+    Acciones.BuscarporXpath("//div[3]/div[1]/div[2]/div/div[4]/div/div[2]/a[2]", "Guardar");
 	 
     WebElement DespleglableQA = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main-view\"]/div[3]/div[2]/div/div[1]/div[2]/div/div/div[1]/div[2]/div/div/div[1]/div[1]/div/div[1]/div/div")));
     String textoActual = DespleglableQA.getText();

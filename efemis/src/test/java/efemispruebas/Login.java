@@ -1,5 +1,6 @@
 package efemispruebas;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
@@ -22,7 +23,7 @@ public class Login extends efemis {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void iniciarSesion(String URL, String username, String password) {
+	public void iniciarSesion(String URL, String username, String password) throws IOException {
 		driver.get(URL);
 		driver.manage().window().maximize();
 
@@ -70,11 +71,11 @@ public class Login extends efemis {
 		    }
 		//Desplegamos el menu izquierdo
 		//*[@id="main-view"]/div[2]/div[1]/div[2]/div/div[1]/a
-		Acciones.BuscarporXpath("//*[@id=\"main-view\"]/div[2]/div[1]/div[2]/div/div[1]/a");
+		Acciones.BuscarporXpath("//*[@id=\"main-view\"]/div[2]/div[1]/div[2]/div/div[1]/a", "menu izquierdo");
 		//html/body/div/div[1]/div[3]/div[1]/div[2]/div/div[1]/a
 		//*[@id="main-view"]/div[3]/div[1]/div[2]/div/div[1]/a
 		 //Pulsamos sobre Inicio
-		   Acciones.BuscarporXpath("//a[contains(text(),'Inicio')]");
+		   Acciones.BuscarporXpath("//a[contains(text(),'Inicio')]", "pulsar inicio");
 		
 		   //Obtenemos la URL
 	       urlActual = driver.getCurrentUrl();

@@ -37,37 +37,38 @@ public class PlanificarRecomendacion extends efemis {
 		seleccion.click();
 
     	 //Boton planificaion
-		Acciones.BuscarporXpath("//span[text()='"+OpcionAccion+"']");
+		Acciones.BuscarporXpath("//span[text()='"+OpcionAccion+"']", " boton planificacion");
          
         /**
          * Seleccion Empresa de Servicios
          */
  
         //Desplegable empresa servicios
-       Acciones.BuscarporXpath("//div[2]/div/div[3]/div/div[2]/div/div/div/div/div/div/div/div/div[2]/div/div/div");
+       Acciones.BuscarporXpath("//div[2]/div/div[3]/div/div[2]/div/div/div/div/div/div/div/div/div[2]/div/div/div", " Desplegable Empresa Servicios");
   
-        WebElement escrituraEmpresa = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input")));   
-        escrituraEmpresa.sendKeys(OpcionEmpresa);
+       /* WebElement escrituraEmpresa = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input")));   
+        escrituraEmpresa.sendKeys(OpcionEmpresa);*/
+        Acciones.escribirXpathString("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input", "Escribir Empresa Serrvicios", OpcionEmpresa);
         
       //Buscamos el elemento filtrado y le hacemos click       
-      Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionEmpresa+"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']") ;
+      Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionEmpresa+"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']", "click empresa servicios") ;
 
         
         //A�adimos empresa
-      Acciones.BuscarporXpath("//div[2]/div/div/div/div[2]/div/div/span");      
+      Acciones.BuscarporXpath("//div[2]/div/div/div/div[2]/div/div/span", " click añadir empresa");      
         /**
          * Seleccion Trabajadores
          */
       //Desplegable Trabajadores
-        Acciones.BuscarporXpath("//div[4]/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[2]/div/div");
+        Acciones.BuscarporXpath("//div[4]/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[2]/div/div", " click desplegable tranajadores");
         
       //Seleccion de Permanente
-        Acciones.BuscarporXpath("//div[@class='dx-item-content dx-list-item-content' and text()='"+OpcionTrabajadores+"']");
+        Acciones.BuscarporXpath("//div[@class='dx-item-content dx-list-item-content' and text()='"+OpcionTrabajadores+"']", " seleccion permanente (Trabajadores)");
         
       //A�adimos Trabajador
-      Acciones.BuscarporXpath("//div[2]/div/div/div[2]/div/div/span");
+      Acciones.BuscarporXpath("//div[2]/div/div/div[2]/div/div/span", " Añadir Trabajador");
 
-        Acciones.BuscarporXpath("//html/body/div/div[1]/div[3]/div[2]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td[1]/div/div\r\n");
+        Acciones.BuscarporXpath("//html/body/div/div[1]/div[3]/div[2]/div/div[4]/div/div[2]/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td[1]/div/div\r\n", "Sleccion");
 
 
         /**
@@ -75,58 +76,61 @@ public class PlanificarRecomendacion extends efemis {
          */
       
       //Desplegable Maquinaria
-      Acciones.BuscarporXpath("//div[3]/div[2]/div/div[5]/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/div");
+      Acciones.BuscarporXpath("//div[3]/div[2]/div/div[5]/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/div", " Desplegable Maquinaria");
                                                                                      
-        WebElement escrituraMaquinaria = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input")));   
-        escrituraMaquinaria.sendKeys(OpcionMaquinaria);
+       /* WebElement escrituraMaquinaria = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input")));   
+        escrituraMaquinaria.sendKeys(OpcionMaquinaria);*/
+        Acciones.escribirXpathString("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input", " Escribir maquinaria", OpcionMaquinaria);
         
       //Buscamos el elemento filtrado y le hacemos click       
-        Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionMaquinaria +"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']");
+        Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionMaquinaria +"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']", " Click en la maquinaria");
   
      
         //A�adimos Maquinaria
-       Acciones.BuscarporXpath("//div[2]/div/div[5]/div/div[2]/div/div[1]/div[3]/div");
+       Acciones.BuscarporXpath("//div[2]/div/div[5]/div/div[2]/div/div[1]/div[3]/div", " Añadimos maquinaria");
 
         
         /**
          * Seleccion Aperos
          */
       //Desplegable Aperos
-        Acciones.BuscarporXpath("//div[3]/div[2]/div/div[6]/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/div");
+        Acciones.BuscarporXpath("//div[3]/div[2]/div/div[6]/div/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/div", " Desplegable aperos");
        
-        WebElement escrituraAperos = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input")));   
-        escrituraAperos.sendKeys(OpcionAperos);
+       /* WebElement escrituraAperos = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input")));   
+        escrituraAperos.sendKeys(OpcionAperos);*/
+        Acciones.escribirXpathString("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input", "Escritura aperos", OpcionAperos);
         
       //Buscamos el elemento filtrado y le hacemos click  
-        Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionAperos +"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']");
+        Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionAperos +"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']", " Seleccion apaeros buscados");
 
              
       //A�adimos Aperos
-       Acciones.BuscarporXpath("//div[3]/div[2]/div/div[6]/div/div[2]/div/div[1]/div[3]/div");
+       Acciones.BuscarporXpath("//div[3]/div[2]/div/div[6]/div/div[2]/div/div[1]/div[3]/div", " Añadir aperos");
        
         
         /**
          * Seleccion Herramientas
          */
       //Desplegable Herramientas
-        Acciones.BuscarporXpath("//div[3]/div[2]/div/div[7]/div/div[2]/div/div[1]/div[2]/div/div[2]/div[1]/div[1]/div[1]/div/div[2]/div");
+        Acciones.BuscarporXpath("//div[3]/div[2]/div/div[7]/div/div[2]/div/div[1]/div[2]/div/div[2]/div[1]/div[1]/div[1]/div/div[2]/div", " Desplegable herramientas");
 
         
-        WebElement escrituraHerramientas = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input")));   
-        escrituraHerramientas.sendKeys(OpcionHerramietas);
+       /* WebElement escrituraHerramientas = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input")));   
+        escrituraHerramientas.sendKeys(OpcionHerramietas);*/
+        Acciones.escribirXpathString("//body/div[2]/div/div/div/div/div[5]/div/table/tbody/tr[2]/td[4]/div/div[2]/div/div/div[1]/input", " Escritura herramientas", OpcionHerramietas);
         
       //Buscamos el elemento filtrado y le hacemos click   
-        Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionHerramietas +"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']");
+        Acciones.BuscarporXpath("//td[contains(text(),'"+OpcionHerramietas +"')]/preceding-sibling::td/div/div/span[@class='dx-checkbox-icon']", " Seleccion Herramienta filtrada");
 
     
       //A�adimos Tijeras
-       Acciones.BuscarporXpath("//div[3]/div[2]/div/div[7]/div/div[2]/div/div[1]/div[3]/div");
+       Acciones.BuscarporXpath("//div[3]/div[2]/div/div[7]/div/div[2]/div/div[1]/div[3]/div", " Añadir herramienta");
 
  
         /**
          * Guardamos 
          */
-        Acciones.BuscarporXpath("//div[3]/div[1]/div[2]/div/div[4]/div/div[2]/a[2]");
+        Acciones.BuscarporXpath("//div[3]/div[1]/div[2]/div/div[4]/div/div[2]/a[2]", "Guardar");
 
         try {
 	         Thread.sleep(7000); 

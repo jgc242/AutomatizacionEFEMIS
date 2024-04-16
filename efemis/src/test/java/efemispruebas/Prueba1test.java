@@ -120,8 +120,8 @@ public class Prueba1test {
     public void tearDown() {     
     	extent.flush();
     	if (driver != null) {
-           driver.quit();
-       }
+          driver.quit();
+        }
     	VideoRecorder.stopRecord();
     	
     }
@@ -215,9 +215,6 @@ public class Prueba1test {
     		
     		Assert.assertEquals(tar, tarea);  
        	    screen.pass("[ OK ] -> Se ha aencontrado la tarea con exito.");
-  		
-    		//Assert.assertEquals(cul, cultivo);  
-       	    //screen.pass("[ OK ] -> Se ha encontrado el cultivo con exito.");
     		
         	Assert.assertEquals(URL4, "https://efemispre.hispatec.com/recommendations/create");  
        	    screen.pass("[ OK ] -> Se ha accedido correctamente a crear la recomendacion.");

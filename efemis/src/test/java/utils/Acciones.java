@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.model.Media;
 
 import efemispruebas.efemis;
 
@@ -24,7 +26,7 @@ public class Acciones extends efemis{
 	private static File captura;
 	private static File destino;
 	private ExtentReports extent;
-	private ExtentTest screen;
+	private static ExtentTest screen;
 	
 	public Acciones(WebDriver driver,ExtentTest screen) {
 		super(driver);
@@ -32,18 +34,94 @@ public class Acciones extends efemis{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static void BuscarporXpath(String xpath) {
-		WebElement elemento = esperarAClickeable(By.xpath(xpath));
+	public static void BuscarporXpath(String xpath,String elementName) throws IOException {
+		
 		try {
-			 elemento.click();
-		}catch(Exception e) {
-		e.printStackTrace();		
-		}
-       
+			WebElement elemento = esperarAClickeable(By.xpath(xpath));
+            click(elemento, elementName);
+        } catch (Exception e) {
+            screen.info("[DEBUG][ERROR] [No ha sido posible realizar 'click' sobre el elemento]");
+            screen.fail("El clic en el elemento '" + elementName + "' ha fallado.");
+            e.printStackTrace();
+            tomarCapturaDePantalla("Error en "+elementName);
+            throw e;
+        }     
 	}
+	public static void escribirCSS(String css, String elementName,String opcion) throws IOException {
+		try {
+			WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(css)));
+            //click(elemento, elementName);
+			elemento.sendKeys(opcion);
+            
+        } catch (Exception e) {
+            screen.info("[DEBUG][ERROR] [No ha sido posible realizar 'click' sobre el elemento]");
+            screen.fail("El clic en el elemento '" + elementName + "' ha fallado.");
+            e.printStackTrace();
+            tomarCapturaDePantalla("Error en "+elementName);
+
+            throw e;
+        }   
+	}
+	
+	public static void escribirXpathString(String xpath,String elementName,String opcion) throws IOException {
+		
+		try {
+			WebElement elemento = esperarAClickeable(By.xpath(xpath));
+			elemento.sendKeys(opcion);
+        } catch (Exception e) {
+            screen.info("[DEBUG][ERROR] [No ha sido posible realizar 'click' sobre el elemento]");
+            screen.fail("El clic en el elemento '" + elementName + "' ha fallado.");
+            e.printStackTrace();
+            tomarCapturaDePantalla("Error en "+elementName);
+
+            throw e;
+        }     
+	}
+public static void escribirClass(String clas,String elementName,String opcion) throws IOException {
+		
+		try {
+			WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(clas)));
+			elemento.sendKeys(opcion);
+        } catch (Exception e) {
+            screen.info("[DEBUG][ERROR] [No ha sido posible realizar 'click' sobre el elemento]");
+            screen.fail("El clic en el elemento '" + elementName + "' ha fallado.");
+            e.printStackTrace();
+            tomarCapturaDePantalla("Error en "+elementName);
+
+            throw e;
+        }     
+	}
+	
+public static void clickVisibility(String xpath,String elementName) throws IOException {
+	
+	try {
+		WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		click(elemento, elementName);
+		} catch (Exception e) {
+        screen.info("[DEBUG][ERROR] [No ha sido posible realizar 'click' sobre el elemento]");
+        screen.fail("El clic en el elemento '" + elementName + "' ha fallado.");
+        e.printStackTrace();
+        tomarCapturaDePantalla("Error en "+elementName);
+
+        throw e;
+    }     
+}
+	
+	
 	private static WebElement esperarAClickeable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+	
+	 public static void click(WebElement element, String elementName) {
+		 try {
+	            element.click();
+	            screen.log(Status.PASS, "Realizando 'click' sobre el elemento: " + elementName);
+	        } catch (Exception e) {
+	            screen.log(Status.FAIL, "No ha sido posible realizar 'click' sobre el elemento");
+	            e.printStackTrace();
+	        }  
+		 
+	    }
 	
 	
 	private boolean estadoDespuesDeInicioSesionEsCorrecto() {
@@ -71,7 +149,7 @@ public class Acciones extends efemis{
 	    }
 	}*/
 	
-	public void tomarCapturaDePantalla(String nombreArchivo) throws IOException {
+	public static void tomarCapturaDePantalla(String nombreArchivo) throws IOException {
 		//extent = new ExtentReports();
 		//ExtentTest screen = extent.createTest("Captura"); 
 		captura = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
