@@ -1,5 +1,7 @@
 package efemispruebas;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +30,7 @@ public class EjecutarPlanificacion extends efemis{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void ejecucionPlani(String OpcionSupervisor, String OpcionEstado) {
+	public void ejecucionPlani(String OpcionSupervisor, String OpcionEstado) throws IOException {
 	
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[3]/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div[5]/div/div[4]/div/div/div[1]/div/div/div")));
 

@@ -67,16 +67,24 @@ public class Prueba1test {
 	private ExtentReports extent;
 	private ExtentTest screen;
 	
-	private int numeroColumna = 4;
+	//private int numeroColumna = 3;
 
 	
-
+private static int numeroColumna = 0;
+	
+	public static void comprobarColumna() {
+		//int numColumna = Integer.parseInt(System.getProperty("excelColumn")); 
+		String colum = System.getProperty("excelColumn");
+		System.out.println(colum);
+	}
 
 	@Before
 	public void setUp() throws InterruptedException, IOException {
 		System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe"); 
 		driver = new ChromeDriver();
 		Excel = new LeerArchivo(driver);
+		numeroColumna = Integer.parseInt(System.getProperty("excelColumn")); 
+
 		extent = new ExtentReports();
 		ExtentSparkReporter spark = new ExtentSparkReporter("efemis/target/Spark.html");
 		extent.attachReporter(spark);
@@ -322,8 +330,6 @@ public class Prueba1test {
 		ejecutar.ejecutarRecomendacion();
 		//identificador = ejecutar.getIdentificador();
 	}
-	
-
-	}
+}
 
 

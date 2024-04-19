@@ -1,5 +1,7 @@
 package efemispruebas;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +23,7 @@ public class PlanificarRecomendacion extends efemis {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void PlanificarReco(String OpcionAccion, String OpcionEmpresa, String OpcionTrabajadores, String OpcionMaquinaria, String OpcionAperos, String OpcionHerramietas) {
+	public void PlanificarReco(String OpcionAccion, String OpcionEmpresa, String OpcionTrabajadores, String OpcionMaquinaria, String OpcionAperos, String OpcionHerramietas) throws IOException {
 		
 		//esperamos hasta que un boton con el total de reconendaciones sea visible para continuar con la planificacion  	
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main-view\"]/div[3]/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div[5]/div/div[4]/div/div/div[1]/div/div/div")));
